@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificador de Idade</title>
+    <script>
+        function verificar() {
+            var data = new Date(); // Cria um novo objeto de data para obter a data e hora atuais
+            var ano = data.getFullYear(); // Obtém o ano atual a partir do objeto de data
+            var fano = document.getElementById('txtano'); // Obtém o valor do campo de entrada com id 'txtano'
+            var res = document.querySelector('div#rest'); // Seleciona a div com id 'rest' onde o resultado será exibido
+            
+            if (fano.value.length == 0 || fano.value > ano) { // Verifica se o campo está vazio ou se o ano inserido é maior que o ano atual
+                window.alert('Erro, Verifique os dados e tente novamente!'); // Exibe uma mensagem de alerta se a verificação falhar
+            } else {
+                var fsex = document.getElementsByName('radsex'); // Obtém os elementos de entrada do tipo radio com o nome 'radsex'
+                var idade = ano - Number(fano.value); // Calcula a idade subtraindo o ano inserido do ano atual
+                var genero = ''; // Inicializa a variável genero como uma string vazia
+
+                if (fsex[0].checked) { // Verifica se o primeiro radio button (feminino) está selecionado
+                    genero = 'Homem'; // Define genero como 'Homem'
+                } else if (fsex[1].checked) { // Verifica se o segundo radio button (masculino) está selecionado
+                    genero = 'Mulher'; // Define genero como 'Mulher'
+                }
+                
+                res.innerHTML = `Detectamos ${genero} com ${idade} anos.`; // Exibe a mensagem na div 'rest' com o genero e idade calculados
+            }    
+        }
+    </script>
+</head>
+<body>
+    <h1>Verificador de Idade e Gênero</h1>
+    <input type="number" id="txtano" placeholder="Digite seu ano de nascimento"> <!-- Campo de entrada para o ano de nascimento -->
+    <br>
+    <input type="radio" name="radsex" id="masc" value="Masculino"> <!-- Botão de rádio para selecionar "Homem" -->
+    <label for="masc">Homem</label>
+    <input type="radio" name="radsex" id="fem" value="Feminino"> <!-- Botão de rádio para selecionar "Mulher" -->
+    <label for="fem">Mulher</label>
+    <br>
+    <input type="button" value="Verificar" onclick="verificar()"> <!-- Botão que chama a função verificar ao ser clicado -->
+    <div id="rest"></div> <!-- Div onde o resultado será exibido -->
+</body>
+</html>
